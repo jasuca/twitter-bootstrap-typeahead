@@ -41,7 +41,7 @@ function ($) {
       this.shown = false;
       this.initSource();
       this.listen();
-    }
+    };
 
   Typeahead.prototype = {
 
@@ -50,7 +50,7 @@ function ($) {
       initSource: function() {
         if (this.options.source) {
           if (typeof this.options.source === 'string') {
-           this.source = $.extend({}, $.ajaxSettings, { url: this.options.source })
+           this.source = $.extend({}, $.ajaxSettings, { url: this.options.source });
           } else if (typeof this.options.source === 'object') {
             if (this.options.source instanceof Array) {
               this.source = this.options.source;
@@ -175,14 +175,14 @@ function ($) {
             if (typeof that.options.val === 'string') {
               i.attr('data-value', item[that.options.val]);
             } else {
-              i.attr('data-value', JSON.stringify($.extend({}, that.options.val, item)))
+              i.attr('data-value', JSON.stringify($.extend({}, that.options.val, item)));
             }
 
             $templateItem = i.find('.typeahead-display-val');
             $standardItem = i.find('a');
 
             if ($templateItem.length) {
-              $templateItem.html(that.highlighter(item[that.options.display]))
+              $templateItem.html(that.highlighter(item[that.options.display]));
             } else if ($standardItem.length) {
               $standardItem.html(that.highlighter(item[that.options.display]));
             }
@@ -194,7 +194,7 @@ function ($) {
 
         setTimeout(function() {
           that.$menu.html(items);
-        }, 250)
+        }, 250);
 
         return this;
       },
@@ -202,7 +202,7 @@ function ($) {
       select: function () {
         var $selectedItem = this.$menu.find('.active');
         this.$element.val($selectedItem.text()).change();
-        this.options.itemSelected(JSON.parse($selectedItem.attr('data-value')));
+        this.options.itemSelected(this, JSON.parse($selectedItem.attr('data-value')));
         return this.hide();
       },
 
@@ -292,7 +292,7 @@ function ($) {
         e.stopPropagation();
         e.preventDefault();
         setTimeout(function () {
-          if (!that.$menu.is(':focus')) {
+          if (!that.$menu.is(':hover')) {
             that.hide();
           }
         }, 150);
@@ -308,7 +308,7 @@ function ($) {
         this.$menu.find('.active').removeClass('active');
         $(e.currentTarget).addClass('active');
       }
-  }
+  };
 
   //  Plugin definition
   $.fn.typeahead = function (option) {
@@ -325,7 +325,7 @@ function ($) {
           data[option]();
       }
     });
-  }
+  };
 
   $.fn.typeahead.defaults = _defaults;
   $.fn.typeahead.Constructor = Typeahead;
@@ -337,6 +337,6 @@ function ($) {
       if ($this.data('typeahead')) return;
       e.preventDefault();
       $this.typeahead($this.data());
-    })
+    });
   });
 } (window.jQuery);
